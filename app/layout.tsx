@@ -1,6 +1,9 @@
 import { type Metadata } from 'next'
 import { Josefin_Sans } from 'next/font/google'
 
+import Header from '@/components/Header'
+import Main from '@/components/Main'
+
 import '@/styles/global.css'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'], display: 'swap' })
@@ -22,9 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${josefinSans.className} min-h-screen bg-primary-950 text-primary-100`}
+        className={`${josefinSans.className} flex min-h-screen flex-col bg-primary-950 text-primary-100`}
       >
-        {children}
+        <Header />
+        <Main>{children}</Main>
       </body>
     </html>
   )
