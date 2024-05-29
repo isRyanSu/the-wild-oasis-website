@@ -6,8 +6,12 @@ import '@/styles/global.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'The Wild Oasis',
-  description: 'The official website of The Wild Oasis',
+  title: {
+    default: 'Welcome · The Wild Oasis',
+    template: '%s · The Wild Oasis',
+  },
+  description:
+    'Luxurious cabin hotel, located in the heart of the Italian Dolomites, surrounded by beautiful mountains and dark forests.',
 }
 
 export default function RootLayout({
