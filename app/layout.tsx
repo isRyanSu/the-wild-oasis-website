@@ -1,9 +1,9 @@
 import { type Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Josefin_Sans } from 'next/font/google'
 
 import '@/styles/global.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const josefinSans = Josefin_Sans({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} min-h-screen bg-primary-950 text-primary-100`}
+        className={`${josefinSans.className} min-h-screen bg-primary-950 text-primary-100`}
       >
         {children}
       </body>
