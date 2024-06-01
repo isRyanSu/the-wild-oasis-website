@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   // CHANGE
-  const bookings: Booking[] = []
+  const bookings: (Booking & { Cabins: { name: string; image: string } })[] = []
 
   return (
     <div>
@@ -29,9 +29,13 @@ export default function Page() {
         </p>
       ) : (
         <ul className="space-y-6">
-          {bookings.map((booking: Booking) => (
-            <ReservationCard key={booking.id} booking={booking} />
-          ))}
+          {bookings.map(
+            (
+              booking: Booking & { Cabins: { name: string; image: string } },
+            ) => (
+              <ReservationCard key={booking.id} booking={booking} />
+            ),
+          )}
         </ul>
       )}
     </div>
