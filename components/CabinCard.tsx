@@ -3,18 +3,22 @@ import Link from 'next/link'
 
 import { User } from 'lucide-react'
 
-import { type Cabin } from '@/types/Cabin'
+import { type Cabin } from '@/services/cabins/getCabins'
 
 export default function CabinCard({ cabin }: { cabin: Cabin }) {
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin
 
   return (
     <div className="flex border border-primary-800">
-      <Image
-        src={image}
-        alt={`Cabin ${name}`}
-        className="flex-1 border-r border-primary-800"
-      />
+      <div className="relative flex-1">
+        <Image
+          src={image || ''}
+          alt={`Cabin ${name}`}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          fill
+          className="border-r border-primary-800 object-cover"
+        />
+      </div>
 
       <div className="flex-grow">
         <div className="bg-primary-950 px-7 pb-4 pt-5">
@@ -30,15 +34,19 @@ export default function CabinCard({ cabin }: { cabin: Cabin }) {
           </div>
 
           <p className="flex items-baseline justify-end gap-3">
-            {discount > 0 ? (
-              <>
-                <span className="text-3xl font-[350]">
-                  ${regularPrice - discount}
-                </span>
-                <span className="font-semibold text-primary-600 line-through">
-                  ${regularPrice}
-                </span>
-              </>
+            {discount ? (
+              regularPrice ? (
+                <>
+                  <span className="text-3xl font-[350]">
+                    ${regularPrice - discount}
+                  </span>
+                  <span className="font-semibold text-primary-600 line-through">
+                    ${regularPrice}
+                  </span>
+                </>
+              ) : (
+                <span className="text-3xl font-[350]">Inquire on-site</span>
+              )
             ) : (
               <span className="text-3xl font-[350]">${regularPrice}</span>
             )}

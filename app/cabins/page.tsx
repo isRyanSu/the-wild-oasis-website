@@ -1,10 +1,9 @@
 import CabinCard from '@/components/CabinCard'
 
-import { type Cabin } from '@/types/Cabin'
+import getCabins, { type Cabin } from '@/services/cabins/getCabins'
 
-export default function CabinsPage() {
-  // CHANGE
-  const cabins: Cabin[] = []
+export default async function CabinsPage() {
+  const cabins: Cabin[] = await getCabins()
 
   return (
     <div>
