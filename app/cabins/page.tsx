@@ -1,10 +1,9 @@
-import CabinCard from '@/components/CabinCard'
+import { Suspense } from 'react'
 
-import getCabins, { type Cabin } from '@/services/cabins/getCabins'
+import Spinner from '@/components/Spinner'
+import CabinList from '@/components/CabinList'
 
-export default async function CabinsPage() {
-  const cabins: Cabin[] = await getCabins()
-
+export default function CabinsPage() {
   return (
     <div>
       <h1 className="mb-5 text-4xl font-medium text-accent-400">
@@ -19,13 +18,16 @@ export default async function CabinsPage() {
         Welcome to paradise.
       </p>
 
-      {cabins.length > 0 && (
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:gap-12 xl:gap-14">
-          {cabins.map((cabin: Cabin) => (
-            <CabinCard key={cabin.id} cabin={cabin} />
-          ))}
-        </div>
-      )}
+      <Suspense
+        fallback={
+          <div className="grid items-center justify-center">
+            <Spinner />
+            <p className="text-xl text-primary-200">Loading cabin data...</p>
+          </div>
+        }
+      >
+        <CabinList />
+      </Suspense>
     </div>
   )
 }
