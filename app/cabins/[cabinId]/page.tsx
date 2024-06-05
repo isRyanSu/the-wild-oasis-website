@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import { EyeOff, MapPin, User } from 'lucide-react'
 
+import getCabins, { type Cabin } from '@/services/cabins/getCabins'
 import getCabin from '@/services/cabins/getCabin'
 
 // Dynamic Metadata
@@ -15,6 +16,17 @@ export async function generateMetadata({
   const { name } = await getCabin(cabinId)
 
   return { title: `Cabin ${name} · The Wild Oasis` } as Metadata
+}
+
+export async function generateStaticParams({
+  params: { cabinId },
+}: {
+  params: { cabinId: string }
+}) {
+  const cabins = await getCabins()
+  const cabinIds = cabins.map((cabin: Cabin) => ({ cabinId: String(cabin.id) }))
+
+  return cabinIds
 }
 
 export default async function CabinPage({
