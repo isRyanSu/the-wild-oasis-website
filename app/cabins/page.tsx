@@ -3,6 +3,8 @@ import { Suspense } from 'react'
 import Spinner from '@/components/Spinner'
 import CabinList from '@/components/CabinList'
 
+export const revalidate = 3600
+
 export default function CabinsPage() {
   return (
     <div>
