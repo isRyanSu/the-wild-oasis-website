@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-import { type Database } from '@/types/database'
+import { type Database } from '@/types/Database'
 
 if (!process.env.SUPABASE_URL || !process.env.SUPABASE_KEY) {
   throw new Error(
