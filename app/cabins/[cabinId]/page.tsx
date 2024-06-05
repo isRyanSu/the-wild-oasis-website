@@ -4,6 +4,8 @@ import Image from 'next/image'
 
 import { EyeOff, MapPin, User } from 'lucide-react'
 
+import TextExpander from '@/components/TextExpander'
+
 import getCabins, { type Cabin } from '@/services/cabins/getCabins'
 import getCabin from '@/services/cabins/getCabin'
 
@@ -56,7 +58,9 @@ export default async function CabinPage({
             Cabin {name}
           </h3>
 
-          <p className="mb-10 text-lg text-primary-300">{description}</p>
+          <p className="mb-10 text-lg text-primary-300">
+            <TextExpander>{description}</TextExpander>
+          </p>
 
           <ul className="mb-7 flex flex-col gap-4">
             <li className="flex items-center gap-3">
