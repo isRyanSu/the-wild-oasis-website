@@ -1,11 +1,19 @@
 import { Suspense } from 'react'
 
+import Filter from '@/components/Filter'
 import Spinner from '@/components/Spinner'
 import CabinList from '@/components/CabinList'
 
-export const revalidate = 3600
+interface CabinsPageProps {
+  searchParams: { capacity?: string }
+}
 
-export default function CabinsPage() {
+// 当页面转变为动态渲染后就失效了
+// export const revalidate = 3600
+
+export default function CabinsPage({ searchParams }: CabinsPageProps) {
+  const capacity = searchParams?.capacity ?? 'all'
+
   return (
     <div>
       <h1 className="mb-5 text-4xl font-medium text-accent-400">
@@ -20,6 +28,10 @@ export default function CabinsPage() {
         Welcome to paradise.
       </p>
 
+      <div className="mb-8 flex justify-end">
+        <Filter />
+      </div>
+
       <Suspense
         fallback={
           <div className="grid items-center justify-center">
@@ -28,7 +40,7 @@ export default function CabinsPage() {
           </div>
         }
       >
-        <CabinList />
+        <CabinList filter={capacity} />
       </Suspense>
     </div>
   )
