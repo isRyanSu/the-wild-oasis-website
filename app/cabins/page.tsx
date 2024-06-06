@@ -33,6 +33,7 @@ export default function CabinsPage({ searchParams }: CabinsPageProps) {
       </div>
 
       <Suspense
+        key={capacity} // 当 key 不一样时会触发 Suspense
         fallback={
           <div className="grid items-center justify-center">
             <Spinner />
