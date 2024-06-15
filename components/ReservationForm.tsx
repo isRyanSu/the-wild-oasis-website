@@ -1,14 +1,19 @@
 'use client'
 
+import Image from 'next/image'
+
+import { type User } from 'next-auth'
+
 import useReservation from '@/hooks/useReservation'
 
 import { type Cabin } from '@/services/cabins/getCabin'
 
 interface ReservationFormProps {
   cabin: Cabin
+  user: User
 }
 
-export default function ReservationForm({ cabin }: ReservationFormProps) {
+export default function ReservationForm({ cabin, user }: ReservationFormProps) {
   const { range } = useReservation()
 
   const { maxCapacity } = cabin
@@ -17,6 +22,17 @@ export default function ReservationForm({ cabin }: ReservationFormProps) {
     <div className="scale-[1.01]">
       <div className="flex items-center justify-between bg-primary-800 px-16 py-2 text-primary-300">
         <p>Logged in as</p>
+        <div className="flex items-center gap-4">
+          <Image
+            src={user.image ?? ''}
+            alt={user.name ?? 'User image'}
+            width={32}
+            height={32}
+            referrerPolicy="no-referrer"
+            className="h-8 rounded-full"
+          />
+          <p>{user.name}</p>
+        </div>
       </div>
 
       <form className="flex flex-col gap-5 bg-primary-900 px-16 py-10 text-lg">
