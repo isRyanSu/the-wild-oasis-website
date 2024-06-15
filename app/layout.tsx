@@ -1,6 +1,8 @@
 import { type Metadata } from 'next'
 import { Josefin_Sans } from 'next/font/google'
 
+import ReservationProvider from '@/contexts/ReservationContext'
+
 import Header from '@/components/Header'
 import Main from '@/components/Main'
 
@@ -28,7 +30,9 @@ export default function RootLayout({
         className={`${josefinSans.className} flex min-h-screen flex-col bg-primary-950 text-primary-100`}
       >
         <Header />
-        <Main>{children}</Main>
+        <Main>
+          <ReservationProvider>{children}</ReservationProvider>
+        </Main>
       </body>
     </html>
   )

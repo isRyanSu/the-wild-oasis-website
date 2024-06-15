@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import Filter from '@/components/Filter'
 import Spinner from '@/components/Spinner'
 import CabinList from '@/components/CabinList'
+import ReservationReminder from '@/components/ReservationReminder'
 
 interface CabinsPageProps {
   searchParams: { capacity?: string }
@@ -42,6 +43,7 @@ export default function CabinsPage({ searchParams }: CabinsPageProps) {
         }
       >
         <CabinList filter={capacity} />
+        <ReservationReminder />
       </Suspense>
     </div>
   )
