@@ -2,17 +2,19 @@ import { type Metadata } from 'next'
 
 import Link from 'next/link'
 
-import ReservationCard from '@/components/ReservationCard'
+import ReservationList from '@/components/ReservationList'
 
-import { type Booking } from '@/types/Booking'
+import { auth } from '@/lib/auth'
+
+import getBookings, { type Booking } from '@/services/bookings/getBookings'
 
 export const metadata: Metadata = {
   title: 'Reservations',
 }
 
-export default function Page() {
-  // CHANGE
-  const bookings: (Booking & { Cabins: { name: string; image: string } })[] = []
+export default async function ReservationsPage() {
+  const session = await auth()
+  const bookings: Booking[] = await getBookings(session.user.guestId) // FIXME: 类型问题
 
   return (
     <div>
@@ -28,15 +30,7 @@ export default function Page() {
           </Link>
         </p>
       ) : (
-        <ul className="space-y-6">
-          {bookings.map(
-            (
-              booking: Booking & { Cabins: { name: string; image: string } },
-            ) => (
-              <ReservationCard key={booking.id} booking={booking} />
-            ),
-          )}
-        </ul>
+        <ReservationList bookings={bookings} />
       )}
     </div>
   )
